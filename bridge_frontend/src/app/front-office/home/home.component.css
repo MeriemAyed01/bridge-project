@@ -1,0 +1,35 @@
+.header-bg {
+    background: url('/assets/images/background.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    padding: 100px 0; /* Adjust padding for spacing */
+  }
+  
+  .overlay-container {
+    background: rgba(211, 211, 211, 0.8); /* Light grey with 80% opacity */
+    border-radius: 20px; /* Rounded corners */
+    padding: 30px; /* Inner spacing */
+    max-width: 800px; /* Limit the width of the container */
+    margin: 0 auto; /* Center the container */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
+    color: black; /* Set text color to black */
+  }
+  
+  .overlay-container h1,
+  .overlay-container p,
+  .overlay-container a {
+    color: black; /* Ensure text and buttons are black */
+  }
+  
+  .overlay-container i {
+    color: black; /* Set icon color to black */
+  }
+  
+  .overlay-container h1,
+  .overlay-container p {
+    margin-bottom: 20px; /* Space between elements */
+  }
+  
+  .overlay-container a {
+    margin: 5px; /* Space between buttons */
+  }

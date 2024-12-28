@@ -1,0 +1,156 @@
+<header class="header-bg py-5 text-center">
+  <div class="overlay-container">
+    <h1 class="display-4">
+      <i class="fas fa-lightbulb"></i> Improve Your Skills
+    </h1>
+    <p class="lead">
+      Take charge of your learning journey and prepare for a brighter future.
+    </p>
+    <a href="#courses" class="btn btn-outline-secondary btn-lg"
+      ><i class="fas fa-book-open"></i> Discover Our Courses</a
+    >
+    <a href="#courses" class="btn btn-outline-secondary btn-lg"
+      ><i class="fas fa-arrow-circle-right"></i> View More</a
+    >
+  </div>
+</header>
+
+
+<!-- Courses Section -->
+<section id="courses" class="py-5 bg-white">
+  <div class="container">
+    <h2 class="mb-5 text-center">
+      <i class="fas fa-chalkboard-teacher"></i> Our Courses
+    </h2>
+
+    <!-- Check if ListCourses is empty -->
+    <div *ngIf="ListCourses.length === 0" class="text-center">
+      <p class="lead">No Courses Available at the Moment</p>
+    </div>
+
+    <!-- Dynamic Loop for ListCourses -->
+    <div class="row text-center" *ngIf="ListCourses.length > 0">
+      <div class="col-md-4" *ngFor="let course of ListCourses">
+        <div class="card mb-4">
+          <img
+          [src]="course.imageUrl || 'assets/images/empty.jpg'"
+          alt="{{ course.title }}"
+          class="card-img-top"
+          style="height: 200px; object-fit: cover;"
+          (error)="onImageError($event)"
+        />
+
+          <div class="card-body">
+            <h5 class="card-title">{{ course.title }}</h5>
+            <p class="card-text">
+              <!-- Display up to 3 lines of description -->
+              <span
+                *ngIf="
+                  course.description && course.description.length > 0;
+                  else emptyDescription
+                "
+                class="text-truncate"
+                [style.display]="'-webkit-box'"
+                [style.webkitLineClamp]="'3'"
+                [style.webkitBoxOrient]="'vertical'"
+                [style.overflow]="'hidden'"
+                [style.wordWrap]="'break-word'"
+              >
+                {{ course.description }}
+              </span>
+
+              <!-- "Read More" link for longer descriptions -->
+              <a
+                *ngIf="course.description && course.description.length > 200"
+                href="javascript:void(0)"
+                (click)="openModal(course)"
+                >Read More</a
+              >
+
+              <!-- Empty description fallback -->
+              <ng-template #emptyDescription>-</ng-template>
+            </p>
+            <p>
+              <strong>{{ course.price }} DT / Month</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="descriptionModal"
+  tabindex="-1"
+  aria-labelledby="descriptionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="descriptionModalLabel">
+          {{ selectedCourse?.title }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ selectedCourse?.description }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5"><i class="fas fa-envelope"></i> Contact Us</h2>
+    <form>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <input type="text" class="form-control" placeholder="Name" required />
+        </div>
+        <div class="col-md-6 mb-3">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            required
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <textarea
+          class="form-control"
+          rows="5"
+          placeholder="Write your message here..."
+          required
+        ></textarea>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-paper-plane"></i> Send the Message
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Register Button -->
+<!-- <footer class="text-center py-3 bg-dark text-light">
+  <button class="btn btn-success btn-lg">
+    <i class="fas fa-user-plus"></i> REGISTER NOW
+  </button>
+</footer> -->

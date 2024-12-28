@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <form [formGroup]="courseForm" (ngSubmit)="saveCourse()">
+    <!-- Title Field -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        formControlName="title"
+        required
+      />
+      <div *ngIf="courseForm.get('title')?.touched && courseForm.get('title')?.invalid" class="text-danger">
+        <div *ngIf="courseForm.get('title')?.errors?.['required']">Title is required.</div>
+        <div *ngIf="courseForm.get('title')?.errors?.['minlength']">Title must be at least 3 characters long.</div>
+      </div>
+    </div>
+
+    <!-- Description Field -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" class="form-control" formControlName="description"></textarea>
+    </div>
+
+    <!-- Price Field -->
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input type="number" id="price" class="form-control" formControlName="price" required />
+      <div *ngIf="courseForm.get('price')?.touched && courseForm.get('price')?.invalid" class="text-danger">
+        <div *ngIf="courseForm.get('price')?.errors?.['required']">Price is required.</div>
+        <div *ngIf="courseForm.get('price')?.errors?.['min']">Price must be greater than 0.</div>
+      </div>
+    </div>
+
+    <!-- Image Field -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" id="image" class="form-control" (change)="onFileSelected($event)" />
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary" routerLink="/admin/courses">Cancel</button>
+  </form>
+</div>
